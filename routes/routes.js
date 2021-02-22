@@ -5,13 +5,25 @@ const { Router } = require('express');
 const { Keeper } = require('../db');
 const router = Router();
 
+// Middleware: Verifica si el usuario está logueado.
+// en caso de que no, lo mandamos al login
+function checkLogin(req, res, next) {
+  console.log('verificando que el usuario está logueado');
+  next();
+}
 
-router.get('/', async (req, res) => {
-  res.render('index.ejs')
+
+router.get('/', checkLogin, async (req, res) => {
+  res.render('index.ejs');
 });
 
 
-router.post('/', async (req, res) => {
+router.get('/dos', checkLogin, async (req, res) => {
+  res.render('dos.ejs');
+});
+
+
+router.post('/', checkLogin, async (req, res) => {
   try {
     // acá coloco lo que intento hacer
     await Keeper.create(req.body);
@@ -22,5 +34,6 @@ router.post('/', async (req, res) => {
   }
   res.redirect('/');
 });
+
 
 module.exports = router;

@@ -34,7 +34,7 @@ const User = sql.define('User', {
       },
       len: {
         args: [3],
-        msg: 'El nonbre debe ser de largo al menos 3'
+        msg: 'El email debe ser de largo al menos 3'
       },
       isEmail: {
         msg: 'Debe ser un email válido'
