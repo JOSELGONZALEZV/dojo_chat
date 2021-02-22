@@ -8,10 +8,11 @@ const router = Router();
 // Middleware: Verifica si el usuario está logueado.
 // en caso de que no, lo mandamos al login
 function checkLogin(req, res, next) {
-  console.log('verificando que el usuario está logueado');
-  next();
-}
-
+  if (req.session.user != null){
+      next();
+  }
+return res.redirect('/login')
+} 
 
 router.get('/', checkLogin, async (req, res) => {
   res.render('index.ejs');
