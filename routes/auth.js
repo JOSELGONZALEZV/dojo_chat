@@ -51,10 +51,11 @@ router.post('/login', async (req, res) => {
   // Después comparamos contraseñas
   var isCorrect = await bcrypt.compare(req.body.password, user.password);
   if (isCorrect == false) {
-    // en caso de que ese email no exista
+    
     req.flash('errors', 'Usuario inexistente o contraseña incorrecta');
     return res.redirect('/login');
   }
+ 
 
   // Finalmente redirigimos al home
   req.session.user = user;

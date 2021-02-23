@@ -25,13 +25,13 @@
         <h4>Ingrese a la plataforma</h4>
         <div class="row">
           <div class="input-field col s12">
-            <input name="email" type="email" class="validate">
+            <input name="email" type="email" class="validate" required>
             <label for="email">Email</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input name="password" type="password" class="validate">
+            <input name="password" type="password" class="validate" required minlength="3">
             <label for="email">Contraseña</label>
           </div>
         </div>
@@ -45,25 +45,25 @@
         <h4>Registrese en nuestra plataforma</h4>
         <div class="row">
           <div class="input-field col s12">
-            <input name="name" type="text" class="validate">
+            <input name="name" type="text" class="validate" required>
             <label for="email">Nombre</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input name="email" type="email" class="validate">
+            <input name="email" type="email" class="validate" required>
             <label for="email">Email</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input name="password" type="password" class="validate">
+            <input name="password" id="password" type="password" class="validate" required>
             <label for="email">Contraseña</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input name="password_confirm" type="password" class="validate">
+            <input name="password_confirm" id="password_confirm" type="password" class="validate" required>
             <label for="email">Confirme Contraseña</label>
           </div>
         </div>
@@ -83,6 +83,17 @@
     <% for (var error of errors) { %>
       M.toast({html: '<%=error%>'});
     <% } %>
+
+    $('#form-register').on('submit', function(){
+      const password1 = $('#password').val();
+      const password2 = $('#password_confirm').val();
+      if (password1 != password2){
+        M.toast({html: 'las contraseña deben ser iguales'}); 
+      }
+      return:false;
+
+    });
+
   </script>
 </body>
 </html>
