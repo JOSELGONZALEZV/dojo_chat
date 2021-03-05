@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('templates/header', {titulo: "Pagina de Prueba Pro" }) %>
+
+    <body>
+
+        <%- include('templates/menu') %>
+
+            <h1>Bienvenido Usuario A la Pagina de PRUEBAS! </h1>
+
+            <script>
+                $(document).ready(function () {
+
+                    toastr.info("Esto igual funciona");
+
+                });
+            </script>
+
+    </body>
+
+</html>

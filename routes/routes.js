@@ -1,40 +1,60 @@
-/**
- * Acá dejamos las rutas internas (rutas que asumen que el usuario ya se logueo a nuestra App)
- */
 const { Router } = require('express');
-const { Keeper } = require('../db');
 const router = Router();
 
-// Middleware: Verifica si el usuario está logueado.
-// en caso de que no, lo mandamos al login
+// aca configuramos las rutas.
 function checkLogin(req, res, next) {
-  if (req.session.user != null){
-      next();
-  }
-return res.redirect('/login')
-} 
 
-router.get('/', checkLogin, async (req, res) => {
-  res.render('index.ejs');
+    
+    if (req.session.user == null){
+        req.flash('errors', "Tienes que estar registrado para ingresar al sistema.");
+        return res.redirect('/login');
+    }
+
+    res.locals.user = req.session.user;
+
+    next();
+}
+
+function checkAdmin(req, res, next){
+
+    if (req.session.user.rol != "ADMIN"){
+        req.flash('errors', "No tienes permisos de Administrador. No puedes entrar a esta parte del sistema.");
+        return res.redirect('/');
+    }
+
+    next();
+
+}
+
+
+router.get("/", [checkLogin ] , (req,res) => {
+
+
+    const errors = req.flash("errors");
+    const mensajes = req.flash("mensajes");
+
+
+
+    res.render("usuariopro.ejs",{ errors, mensajes})
 });
 
 
-router.get('/dos', checkLogin, async (req, res) => {
-  res.render('dos.ejs');
+router.get("/admin", [checkLogin, checkAdmin ] , (req,res) => {
+
+
+    const errors = req.flash("errors");
+    const mensajes = req.flash("mensajes");
+
+    res.render("adminpro.ejs",{ errors, mensajes })
 });
 
+router.get("/prueba", [checkLogin], (req,res) => {
 
-router.post('/', checkLogin, async (req, res) => {
-  try {
-    // acá coloco lo que intento hacer
-    await Keeper.create(req.body);
 
-  } catch (err) {
-    // acá coloco lo que haré si ocurre algún error
-    req.flash('errors', err.errors[key].message);
-  }
-  res.redirect('/');
+    const errors = req.flash("errors");
+    const mensajes = req.flash("mensajes");
+
+    res.render("pruebapro.ejs",{ errors, mensajes })
 });
-
 
 module.exports = router;
