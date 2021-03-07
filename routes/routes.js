@@ -15,16 +15,7 @@ function checkLogin(req, res, next) {
     next();
 }
 
-function checkAdmin(req, res, next){
 
-    if (req.session.user.rol != "ADMIN"){
-        req.flash('errors', "No tienes permisos de Administrador. No puedes entrar a esta parte del sistema.");
-        return res.redirect('/');
-    }
-
-    next();
-
-}
 
 
 router.get("/", [checkLogin ] , (req,res) => {
@@ -39,22 +30,6 @@ router.get("/", [checkLogin ] , (req,res) => {
 });
 
 
-router.get("/admin", [checkLogin, checkAdmin ] , (req,res) => {
 
-
-    const errors = req.flash("errors");
-    const mensajes = req.flash("mensajes");
-
-    res.render("adminpro.ejs",{ errors, mensajes })
-});
-
-router.get("/prueba", [checkLogin], (req,res) => {
-
-
-    const errors = req.flash("errors");
-    const mensajes = req.flash("mensajes");
-
-    res.render("pruebapro.ejs",{ errors, mensajes })
-});
 
 module.exports = router;

@@ -1,15 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Whatsapp Web</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="image/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600%7CRoboto:300,400,500" media="all">
+    <link href="login.ejs"stylesheet">
+    <link href="/css/icomoon.css" rel="stylesheet">
+    <link href="/css/font-awesome.min copy.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/queries.css" rel="stylesheet">
 
+</head>
 <%- include('templates/header', {titulo: "Pagina Usuario Pro"}) %>
-
 <body>
-
     
     <%- include('templates/menu') %>
 
-    <h1>Bienvenido Usuario</h1>
+    <div class="w-app" style="background-color:rgb(240, 242, 154)">
+        <div class="container">
+            <div class="row">
+            <aside class="col-md-4">
+                <header class="w-profile clearfix">
+                    <div class="avatar col-xs-7">
+                        <img src="image/gian.jpg" alt="">
+                    </div>
+                    <div class="w-chat-controls col-xs-4">
+                        <div class="icon-dots-three-vertical"></div>
+                        <div class="icon-message"></div>
+                    </div>
+                </header>
+                <div class="w-search icon-search">
+                    <input type="text" placeholder="Buscar o empezar un chat nuevo" class="w-search-contacts">
+                </div>
+                <ul class="w-recent-chats">
+                    <li>
+                        <div class="avatar">
+                            <img src="image/logocodeacademy.png" alt="" class="wh-44">
+                            <h4 class="w-contact-name">Laboratoria Perú</h4>
+                            <p class="w-last-message" id="mensaje">No se pique!!</p>
+                        </div>
+                      <div class="time" id="hora">14:27</div>
+                    </li>
+                    <li>
+                        <div class="avatar">
+                            <img src="image/raymi.jpg" alt="" class="wh-44">
+                            <h4 class="w-contact-name">Raymi Saldomando</h4>
+                            <p class="w-last-message">La clase va bien!</p>
+                        </div>
+                        <div class="time">11:25</div>
+                    </li>
+                   	
+                </ul>
+            </aside>
+            <div class="col-md-1">
+            </div>   
+            <section class="col-md-7 w-contacts w-messages">
+                <header class="w-chat-messages clearfix">
+                    <div class="avatar col-xs-9 w-chat-profile">
+                        <img src="image/logocodeacademy.png" alt="">
+                        <h4 class="w-contact-name">Laboratoria Perú</h4>
+                        <ul class="w-users-messages">
+                            <li>Ana María, </li>
+                            <li>Aldo, </li>
+                            <li>Gian, </li>
+                            <li>Mariana, </li>
+                            <li>Papu, </li>
+                            <li>Tú</li>
+                        </ul>
+                    </div>
+                    <div class="w-chat-controls col-xs-2">
+                        <div class="icon-attachment"></div>
 
+                        <div class="icon-dots-three-vertical"></div>
+                    </div>
+                </header>
+                <section class="w-chat-panel">
+                    <div class="w-message-list clearfix" id="chat">
+                        <div class="w-message w-message-in">
+                            <div class="w-message-text">
+                                <h5 class="blue-1">Andrea Lamas</h5>
+                                <p>Chicos han visto el nuevo corte de Aldo?</p>
+                                <div class="time">11:12</div>
+                            </div>
+                        </div>
+                        <div class="w-message w-message-out">
+                            <div class="w-message-text">
+                                <p>Antes parecia mufasa jajajaja</p>
+                                <div class="time">11:14</div>
+                            </div>
+                        </div>
+
+                        
+                        <div id="conversacion">
+                            
+                        </div>  							  						
+                    </div>
+                </section>
+                </div>
+                    <footer class="pane-footer w-write-message-footer">
+                        <ul class="w-write-message-list clearfix">
+                        <div class="row">
+                            <li class="col-1 w-write-message-item icon-insert_emoticon w-write-message-icon"></li>
+                            <li class="col-10 w-write-message-item w-write-message-input">
+                                <input type="text" name="w-message-input" class="w-write-message-field" placeholder="Escribe tu mensaje aquí" id="mensajes">
+                            </li>
+                            <li class="col-1 w-write-message-item icon-mic w-write-message-icon"></li>
+                        </div>
+                        </ul>
+                </div>
+                </footer>
+            </section>
+        </div>
+    </div>
+  <script type="text/javascript" src="js/main.js"></script>
 
 </body>
 
