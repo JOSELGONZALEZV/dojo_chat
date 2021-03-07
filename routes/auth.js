@@ -2,6 +2,35 @@ const { Router } = require('express');
 const { User } = require('../db');
 const bcrypt = require('bcrypt');
 const router = Router();
+const path = require ('path');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: 'static/img',
+    filename : (req, file, cb) => {
+        cb(null, file.originalname);
+    //para guardar la imagen con su nombre original
+    // me deja la informacion de la imagen en req.file
+    }
+});
+
+// mideddelware multer para poder leer la imagen e ingresarla a la ruta
+router.use(multer({
+    storage,
+    dest: 'static/img',
+    limits: {fileSize: 2500000},
+    fileFilter: (req, file, cb) => {
+        const filetypes = /jpeg|jpg|png|gif/;
+        const mimetype = filetypes.test(file.mimetype);
+        const extname = filetypes.test(path.extname(file.originalname));
+        if(mimetype && extname) {
+            return cb(null, true);
+        }
+        cb("error el archivo debe contener una imagen valida (ext -jpeg/jpg/png/gif");
+    }
+}).single('image'));
+
+
 
 // aca configuramos las rutas.
 
@@ -24,7 +53,7 @@ router.get("/login", (req, res) => {
 router.post("/register", async (req, res) => {
     console.log("POST /register");
     console.log(req.body);
-
+    console.log(req.file);
     if (req.body.password != req.body.password_confirm) {
         req.flash('errors', "Las contraseñas no coinciden.");
         return res.redirect('/login');
@@ -32,8 +61,7 @@ router.post("/register", async (req, res) => {
 
 
     const password_encrypted = await bcrypt.hash(req.body.password, 10);
-    console.log(password_encrypted);
-
+    console.log(password_encrypted); 
 
     const usuarios = await User.findAndCountAll();
     console.log("Existen:" + usuarios.count + " usuarios en base de datos.");
@@ -47,7 +75,7 @@ router.post("/register", async (req, res) => {
             name: req.body.name,
             email: req.body.email,
             password: password_encrypted,
-            rol: tipo_usuario
+            image: req.file.filename,
         });
 
         console.log(user);

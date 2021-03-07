@@ -60,6 +60,16 @@ const User = sql.define('User', {
                 msg: 'La contraseña debe ser de largo al menos 3'
             },
         }
+    },
+    image: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: 'Debe subir una foto'
+            },
+           
+        }
     }
 });
 

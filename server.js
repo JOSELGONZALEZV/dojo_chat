@@ -3,6 +3,8 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const app = express();
 const port = 8000;
+const multer = require('multer')
+
 
 app.use(session({secret: 'cambiarcadaciertotiempo'}));  
 app.use(flash());
