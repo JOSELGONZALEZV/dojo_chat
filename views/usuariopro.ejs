@@ -27,7 +27,10 @@
                     <div class="avatar col-xs-7">
                         <img src="image/gian.jpg" alt="">
                     </div>
+
                     <div class="w-chat-controls col-xs-4">
+                        <br>
+                        
                         <div class="icon-dots-three-vertical"></div>
                         <div class="icon-message"></div>
                     </div>
@@ -39,6 +42,8 @@
                     <li>
                         <div class="avatar">
                             <img src="image/logocodeacademy.png" alt="" class="wh-44">
+                            <br>
+                            <br>
                             <h4 class="w-contact-name">Laboratoria Perú</h4>
                             <p class="w-last-message" id="mensaje">No se pique!!</p>
                         </div>
@@ -116,6 +121,35 @@
         </div>
     </div>
   <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/moment-with-locales.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+        moment.locale("es");
+
+        $("#mensajes").on("keydown", function(e){
+                if (e.keyCode == 13){
+
+            let mensajeOut = `<div class="w-message w-message-out">
+                            <div class="w-message-text">
+                                <p>${ $("#mensajes").val() }</p>
+                                <div class="time"> ${ moment().format("HH:mm")}</div>
+                            </div>
+                        </div>`
+
+            $("#chat").append(mensajeOut);
+            $("#mensajes").val("");
+
+
+
+                }
+        });
+     
+    
+    });
+
+  </script>
 
 </body>
 
