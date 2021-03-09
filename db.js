@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const clave = require('./secret')
 
 // acá creamos la conexión a la Base de Datos
-const sql = new Sequelize('db_base_login', 'root', clave.clave, {
+const sql = new Sequelize('db_dojo_chat', 'root', clave.clave, {
     host: 'localhost',
     dialect: 'mysql'
 });
@@ -78,14 +78,6 @@ const Message = sql.define('Message', {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
-    },
-    messageIn: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-            notNull: {  
-            },
-        }
     },
     messageOut: {
         type: Sequelize.STRING,

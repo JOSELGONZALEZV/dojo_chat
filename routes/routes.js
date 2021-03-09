@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { User, Message } = require('../db');
 const router = Router();
 
 // aca configuramos las rutas.
@@ -15,10 +16,7 @@ function checkLogin(req, res, next) {
     next();
 }
 
-
-
-
-router.get("/", [checkLogin ] , (req,res) => {
+router.get("/", [checkLogin ] , async (req,res) => {
 
 
     const errors = req.flash("errors");
@@ -29,7 +27,13 @@ router.get("/", [checkLogin ] , (req,res) => {
     res.render("usuariopro.ejs",{ errors, mensajes})
 });
 
+// ruta para guardar los mensaje en la base de dato por id de user en session
+router.post('/guardarmensajeOut', [checkLogin ], async (req,res) => {
+    const user = await User.findOne({id: req.session.user.id});
+    user.createMessage({messageOut:req.body.mensajeOut})
+    res.json();
 
+ });
 
 
 module.exports = router;

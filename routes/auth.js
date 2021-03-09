@@ -13,7 +13,6 @@ const storage = multer.diskStorage({
     // me deja la informacion de la imagen en req.file
     }
 });
-
 // mideddelware multer para poder leer la imagen e ingresarla a la ruta
 router.use(multer({
     storage,
@@ -30,10 +29,7 @@ router.use(multer({
     }
 }).single('image'));
 
-
-
-// aca configuramos las rutas.
-
+//ruta a la vista de chat al usuario logeado
 router.get("/login", (req, res) => {
     console.log("GET /login");
 
@@ -50,6 +46,7 @@ router.get("/login", (req, res) => {
 
 });
 
+//ruta de registro de usuario con confirmacion de pasword e ingreso de foto
 router.post("/register", async (req, res) => {
     console.log("POST /register");
     console.log(req.body);
@@ -94,7 +91,7 @@ router.post("/register", async (req, res) => {
 
 });
 
-
+//ruta de ingreso y verificacion del usuario ya logeado
 router.post("/login", async (req, res) => {
     console.log("POST /login");
     console.log(req.body);
@@ -125,13 +122,17 @@ router.post("/login", async (req, res) => {
 
 });
 
-
-
-// 4. Ruta para cerrar sesión
+// Ruta para cerrar sesión
 router.get('/logout', async (req, res) => {
     req.session.user = null;
     req.flash('mensajes', "Saliste del sistema correctamente.");
     res.redirect('/login');
+});
+//ruta para enviar la informacion de usuario a la vista
+router.get("/login", async (req, res)=>{
+
+    const usuario = await User.findAll();
+    res.render("/usuariopro.ejs", {usuario: usuario})
 });
 
 module.exports = router;

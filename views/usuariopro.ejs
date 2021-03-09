@@ -25,11 +25,10 @@
             <aside class="col-md-4">
                 <header class="w-profile clearfix">
                     <div class="avatar col-xs-7">
-                        <img src="image/gian.jpg" alt="">
+                        <img src="img/<%=user.image%>" alt="">
                     </div>
-
-                    <div class="w-chat-controls col-xs-4">
-                        <br>
+                    <div class="w-chat-controls col-xs-6">
+                       <br>
                         
                         <div class="icon-dots-three-vertical"></div>
                         <div class="icon-message"></div>
@@ -41,23 +40,14 @@
                 <ul class="w-recent-chats">
                     <li>
                         <div class="avatar">
-                            <img src="image/logocodeacademy.png" alt="" class="wh-44">
-                            <br>
-                            <br>
-                            <h4 class="w-contact-name">Laboratoria Perú</h4>
-                            <p class="w-last-message" id="mensaje">No se pique!!</p>
+                           
+                            <img src="" alt="" class="wh-44">
+                            <h4 class="w-contact-name"</h4>
+                            <p class="w-last-message" id="mensaje"></p>
                         </div>
-                      <div class="time" id="hora">14:27</div>
-                    </li>
-                    <li>
-                        <div class="avatar">
-                            <img src="image/raymi.jpg" alt="" class="wh-44">
-                            <h4 class="w-contact-name">Raymi Saldomando</h4>
-                            <p class="w-last-message">La clase va bien!</p>
-                        </div>
-                        <div class="time">11:25</div>
-                    </li>
-                   	
+                      <div class="time" id="hora"></div>
+                    </li>   
+                              	
                 </ul>
             </aside>
             <div class="col-md-1">
@@ -66,14 +56,14 @@
                 <header class="w-chat-messages clearfix">
                     <div class="avatar col-xs-9 w-chat-profile">
                         <img src="image/logocodeacademy.png" alt="">
-                        <h4 class="w-contact-name">Laboratoria Perú</h4>
+                        <h4 class="w-contact-name">xxxxxx</h4>
                         <ul class="w-users-messages">
-                            <li>Ana María, </li>
-                            <li>Aldo, </li>
-                            <li>Gian, </li>
-                            <li>Mariana, </li>
-                            <li>Papu, </li>
-                            <li>Tú</li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
                         </ul>
                     </div>
                     <div class="w-chat-controls col-xs-2">
@@ -84,6 +74,7 @@
                 </header>
                 <section class="w-chat-panel">
                     <div class="w-message-list clearfix" id="chat">
+    
                         <div class="w-message w-message-in">
                             <div class="w-message-text">
                                 <h5 class="blue-1">Andrea Lamas</h5>
@@ -91,14 +82,14 @@
                                 <div class="time">11:12</div>
                             </div>
                         </div>
+                    
                         <div class="w-message w-message-out">
                             <div class="w-message-text">
                                 <p>Antes parecia mufasa jajajaja</p>
                                 <div class="time">11:14</div>
                             </div>
                         </div>
-
-                        
+                   
                         <div id="conversacion">
                             
                         </div>  							  						
@@ -139,15 +130,58 @@
                         </div>`
 
             $("#chat").append(mensajeOut);
+
+            const datos = {
+                    mensajeOut: $("#mensajes").val()}
+                    
+            $.post('/guardarmensajeOut', datos, function (res) {
+                
+            }, "json");
+
             $("#mensajes").val("");
 
-
+            scrollBotton();  
 
                 }
+            
         });
      
-    
+      
+
+    $(".icon-insert_emoticon").on("click", function(){
+        let data = {
+            user:"jl",
+            message:"hola",
+            hora: moment().format("HH:mm")
+        };
+        let mensajeIn =` <div class="w-message w-message-in">
+                            <div class="w-message-text">
+                                <h5 class="blue-1">${data.user}</h5>
+                                <p>${data.message}</p>
+                                <div class="time">${data.hora}</div>
+                            </div>
+                        </div>`
+
+            $("#chat").append(mensajeIn);
+            scrollBotton();
+           
     });
+    divChatbox = $("#chat");
+
+    function scrollBotton(){
+        let newMessage = divChatbox.children('div:last-child');
+
+        let clientHeight = divChatbox.prop('clientHeight');
+        let scrollTop = divChatbox.prop('scrollTop');
+        let scrollHeight = divChatbox.prop('scrollHeight');
+        let newMessageHeight = newMessage.innerHeight();
+        let lastMessageHeight = newMessage.prev().innerHeight()|| 0;
+
+        if(clientHeight + scrollTop + scrollHeight +newMessageHeight + lastMessageHeight) {
+            divChatbox.scrollTop(scrollHeight);
+        }
+    }
+});
 
   </script>
 

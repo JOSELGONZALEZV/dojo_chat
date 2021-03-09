@@ -6,6 +6,7 @@ const port = 8000;
 const multer = require('multer')
 
 
+
 app.use(session({secret: 'cambiarcadaciertotiempo'}));  
 app.use(flash());
 
@@ -28,6 +29,14 @@ app.use(require('./routes/auth'));
 app.use(require('./routes/routes'));
 
 
-app.listen(port, function() {
-    console.log('Escuchando en el puerto ' + port);
+
+const server = app.listen( port, () => console.log(`Listening on port: ${port}`) );
+const io =require('socket.io')(server);
+
+io.on('connection', function(data){
+
+socket.on('mensaje', data);
+socket.broadcast.emit('mensajeIn', data);
+
+
 });
