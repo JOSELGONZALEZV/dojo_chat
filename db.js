@@ -21,7 +21,7 @@ const User = sql.define('User', {
                 msg: 'Debe indicar un nombre'
             },
             len: {
-                args: [2],
+                args: [3],
                 msg: 'El nombre debe ser de largo al menos 2'
             }
         }
@@ -58,7 +58,7 @@ const User = sql.define('User', {
             len: {
                 args: [3],
                 msg: 'La contraseña debe ser de largo al menos 3'
-            },
+            }
         }
     },
     image: {
@@ -67,11 +67,11 @@ const User = sql.define('User', {
         validate: {
             notNull: {
                 msg: 'Debe subir una foto'
-            },
+            }
            
         }
     }
-});
+}, {timetamps: true});
 
 const Message = sql.define('Message', {
     id: {
@@ -84,11 +84,21 @@ const Message = sql.define('Message', {
         allowNull: false,
         validate: {
             notNull: {  
-            },
+                msg: 'debe ingresar un mensaje'
+            }
+        }
+    },
+    time: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            notNull: {  
+                msg: 'debe ingresar una hora'
+            }
         }
     }
     
-});
+},{timetamps: true});
 
 //  después sincronizamos nuestro código con la base de datos
 sql.sync()

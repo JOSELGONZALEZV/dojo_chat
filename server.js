@@ -31,12 +31,14 @@ app.use(require('./routes/routes'));
 
 
 const server = app.listen( port, () => console.log(`Listening on port: ${port}`) );
-const io =require('socket.io')(server);
 
-io.on('connection', function(data){
+const io = require('socket.io')(server);
 
-socket.on('mensaje', data);
-socket.broadcast.emit('mensajeIn', data);
+io.on('connection', function(socket){
+
+socket.on('mensaje', function(data){
+    socket.broadcast.emit('mensajeIn', data);
+});
 
 
 });

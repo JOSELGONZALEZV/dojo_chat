@@ -29,10 +29,12 @@ router.get("/", [checkLogin ] , async (req,res) => {
 
 // ruta para guardar los mensaje en la base de dato por id de user en session
 router.post('/guardarmensajeOut', [checkLogin ], async (req,res) => {
-    const user = await User.findOne({id: req.session.user.id});
-    user.createMessage({messageOut:req.body.mensajeOut})
-    res.json();
-
+   // const user = await User.findOne({id: req.session.user.id});
+    await Message.create({messageOut:req.body.mensaje, 
+                        time:req.body.hora, 
+                        UserId:req.body.UserId})
+                        res.send('ok');
+   
  });
 
 
