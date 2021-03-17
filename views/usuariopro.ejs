@@ -37,30 +37,18 @@
                     <input type="text" placeholder="Buscar o empezar un chat nuevo" class="w-search-contacts">
                 </div>
                 <ul class="w-recent-chats">
-                    <li>
-                        <div class="avatar">
-                            <img src="img/bacteriofago.jpg" alt="" class="wh-44">
-                            <h4 class="w-contact-name">bacteriofago</h4>
-                            <p class="w-last-message" id="mensaje"></p>
-                        </div>
-                      <div class="time" id="hora"></div>
-                    </li>  
-                    <li>
-                        <div class="avatar">
-                            <img src="img/campylobacter.jpg" alt="" class="wh-44">
-                            <h4 class="w-contact-name">campylobacter</h4>
-                            <p class="w-last-message" id="mensaje"></p>
-                        </div>
-                      <div class="time" id="hora"></div>
-                    </li>
-                    <li>
-                        <div class="avatar">
-                            <img src="img/saccharomyces.jpg" alt="" class="wh-44">
-                            <h4 class="w-contact-name">saccharomyces</h4>
-                            <p class="w-last-message" id="mensaje"></p>
-                        </div>
-                      <div class="time" id="hora"></div>
-                    </li>      	   	
+                   
+                        <% for ( let usuario of listusuarios) { %>
+                            <li>
+                                <div class="avatar">  
+                                    <img src="img/<%=usuario.image%>" alt="" class="wh-44">
+                                    <h4 class="w-contact-name"><%=usuario.name%></h4>
+                                    <p class="w-last-message" id="mensaje"></p>
+                                </div>
+                                <div class="time" id="hora"></div>
+                            </li>
+                        <% } %>
+                    
                 </ul>
             </aside>
             <div class="col-md-1">

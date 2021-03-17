@@ -17,17 +17,17 @@ function checkLogin(req, res, next) {
 }
 
 router.get("/", [checkLogin ] , async (req,res) => {
-    const listmessages =await Message.findAll({
+    const listmessages = await Message.findAll({
         include:[{ model: User}]
-
     });
+    const listusuarios = await User.findAll({
+        include:[{ model: Message}]
+    });  
 
     const errors = req.flash("errors");
     const mensajes = req.flash("mensajes");
 
-
-
-    res.render("usuariopro.ejs",{errors, mensajes, listmessages})
+    res.render("usuariopro.ejs",{errors, mensajes, listmessages, listusuarios})
 });
 
 // ruta para guardar los mensaje en la base de dato por id de user en session
